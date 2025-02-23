@@ -97,3 +97,18 @@ def fazer_agendamento() -> None:
 
     lista_agendamentos.append(novo_agendamento) # Cria agendamento
 
+def verificar_proxima_disponibilidade(numero_quarto: int) -> str:
+    datas_ocupadas = []
+    
+    for agendamento in lista_agendamentos:
+        if agendamento["numero_quarto"] == numero_quarto:
+            datas_ocupadas.append((agendamento["data_entrada"], agendamento["data_saida"]))
+    
+    if not datas_ocupadas:
+        return "O quarto está disponível imediatamente."
+    
+    datas_ocupadas.sort()
+    ultima_saida = datas_ocupadas[-1][1]
+    return f"O quarto estará livre a partir de {ultima_saida.strftime('%d-%m-%Y')}"
+
+
